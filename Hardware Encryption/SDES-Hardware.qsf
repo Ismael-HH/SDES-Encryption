@@ -1,0 +1,232 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2024  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+# Date created = 20:11:34  March 12, 2026
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		SDES-Hardware_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Intel recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+#============================================================
+# Clock
+#============================================================
+set_location_assignment PIN_AF14 -to clk
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+
+#============================================================
+# SW
+#============================================================
+set_location_assignment PIN_AB12 -to bin[0]
+set_location_assignment PIN_AC12 -to bin[1]
+set_location_assignment PIN_AF9 -to bin[2]
+set_location_assignment PIN_AF10 -to bin[3]
+set_location_assignment PIN_AD11 -to bin[4]
+set_location_assignment PIN_AD12 -to bin[5]
+set_location_assignment PIN_AE11 -to bin[6]
+set_location_assignment PIN_AC9 -to bin[7]
+set_location_assignment PIN_AD10 -to bin[8]
+set_location_assignment PIN_AE12 -to bin[9]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to bin[9]
+
+#============================================================
+# KEY
+#============================================================
+set_location_assignment PIN_AA14 -to reset
+set_location_assignment PIN_AA15 -to btnDecrypt
+set_location_assignment PIN_W15 -to btnEncrypt
+set_location_assignment PIN_Y16 -to btnKey
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to btnKey
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to btnEncrypt
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to btnDecrypt
+
+#============================================================
+# HEX0
+#============================================================
+set_location_assignment PIN_AE26 -to ResultOnesP[6]
+set_location_assignment PIN_AE27 -to ResultOnesP[5]
+set_location_assignment PIN_AE28 -to ResultOnesP[4]
+set_location_assignment PIN_AG27 -to ResultOnesP[3]
+set_location_assignment PIN_AF28 -to ResultOnesP[2]
+set_location_assignment PIN_AG28 -to ResultOnesP[1]
+set_location_assignment PIN_AH28 -to ResultOnesP[0]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultOnesP[6]
+
+#============================================================
+# HEX1
+#============================================================
+set_location_assignment PIN_AJ29 -to ResultSixteensP[6]
+set_location_assignment PIN_AH29 -to ResultSixteensP[5]
+set_location_assignment PIN_AH30 -to ResultSixteensP[4]
+set_location_assignment PIN_AG30 -to ResultSixteensP[3]
+set_location_assignment PIN_AF29 -to ResultSixteensP[2]
+set_location_assignment PIN_AF30 -to ResultSixteensP[1]
+set_location_assignment PIN_AD27 -to ResultSixteensP[0]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ResultSixteensP[6]
+
+#============================================================
+# HEX2
+#============================================================
+set_location_assignment PIN_AB23 -to keyTwoOnesP[6]
+set_location_assignment PIN_AE29 -to keyTwoOnesP[5]
+set_location_assignment PIN_AD29 -to keyTwoOnesP[4]
+set_location_assignment PIN_AC28 -to keyTwoOnesP[3]
+set_location_assignment PIN_AD30 -to keyTwoOnesP[2]
+set_location_assignment PIN_AC29 -to keyTwoOnesP[1]
+set_location_assignment PIN_AC30 -to keyTwoOnesP[0]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyTwoOnesP[6]
+
+#============================================================
+# HEX3
+#============================================================
+
+set_location_assignment PIN_AD26 -to KeyTwoSixteensP[6]
+set_location_assignment PIN_AC27 -to KeyTwoSixteensP[5]
+set_location_assignment PIN_AD25 -to KeyTwoSixteensP[4]
+set_location_assignment PIN_AC25 -to KeyTwoSixteensP[3]
+set_location_assignment PIN_AB28 -to KeyTwoSixteensP[2]
+set_location_assignment PIN_AB25 -to KeyTwoSixteensP[1]
+set_location_assignment PIN_AB22 -to KeyTwoSixteensP[0]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KeyTwoSixteensP[6]
+
+
+
+#============================================================
+# HEX4
+#============================================================
+set_location_assignment PIN_AA24 -to keyOneOnesP[6]
+set_location_assignment PIN_Y23 -to keyOneOnesP[5]
+set_location_assignment PIN_Y24 -to keyOneOnesP[4]
+set_location_assignment PIN_W22 -to keyOneOnesP[3]
+set_location_assignment PIN_W24 -to keyOneOnesP[2]
+set_location_assignment PIN_V23 -to keyOneOnesP[1]
+set_location_assignment PIN_W25 -to keyOneOnesP[0]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOneOnesP[6]
+
+
+
+#============================================================
+# HEX5
+#============================================================
+set_location_assignment PIN_V25 -to keyOnoSixteensP[6]
+set_location_assignment PIN_AA28 -to keyOnoSixteensP[5]
+set_location_assignment PIN_Y27 -to keyOnoSixteensP[4]
+set_location_assignment PIN_AB27 -to keyOnoSixteensP[3]
+set_location_assignment PIN_AB26 -to keyOnoSixteensP[2]
+set_location_assignment PIN_AA26 -to keyOnoSixteensP[1]
+set_location_assignment PIN_AA25 -to keyOnoSixteensP[0]
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to keyOnoSixteensP[6]
+
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEMA5F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY encryptTopLevel
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:11:34  MARCH 12, 2026"
+set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.1 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name BOARD "DE1-SoC Board"
+set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (Verilog)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name SOURCE_FILE "SDES-Hardware.qsf"
+set_global_assignment -name VERILOG_FILE sevenSeg.v
+set_global_assignment -name VERILOG_FILE encryptTopLevel.v
+set_global_assignment -name VERILOG_FILE decrypt.v
+set_global_assignment -name VERILOG_FILE encrypts.v
+set_global_assignment -name VERILOG_FILE createKeys.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

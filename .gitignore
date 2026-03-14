@@ -1,0 +1,21 @@
+# Quartus build folders
+db/
+incremental_db/
+output_files/
+simulation/
+
+# Quartus editor
+.qsys_edit/
+
+# backup files
+*.bak
+
+# reports
+*.rpt
+
+# temporary files
+*.flock
+*.smsg
+
+# generated
+*pin_model_dump.txt
