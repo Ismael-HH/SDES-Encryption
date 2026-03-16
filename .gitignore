@@ -1,10 +1,9 @@
-# Quartus build folders
+# Quartus build folders and files
 db/
 incremental_db/
 output_files/
 simulation/
-
-# Quartus editor
+*.qws
 .qsys_edit/
 
 # backup files
@@ -19,3 +18,16 @@ simulation/
 
 # generated
 *pin_model_dump.txt
+
+# Software build outputs
+*.o
+*.d
+*.elf
+*.axf
+*.map
+*.bin
+*.hex
+
+Debug/
+Release/
+build/

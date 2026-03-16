@@ -1,0 +1,16 @@
+01:30:39 **** Incremental Build of configuration Debug for project app ****
+"C:\\intelFPGA\\23.1std\\riscfree\\build_tools\\bin\\make.exe" -j all 
+[ 97%] Built target freertos_bsp
+[ 97%] Building C object CMakeFiles/app.elf.dir/main.c.obj
+[ 98%] Linking C executable app.elf
+[ 98%] Built target app.elf
+[ 99%] Creating app.elf.objdump.
+[100%] Reporting memory available for stack + heap in app.elf.
+app.elf
+ * 237.70 KB - Program size (code + initialized data).
+ * 65291.22 KB - Free for stack + heap.
+[100%] Built target niosv-stack-report
+[100%] Built target create-objdump
+
+01:30:43 Build Finished. 0 errors, 0 warnings. (took 3s.717ms)
+

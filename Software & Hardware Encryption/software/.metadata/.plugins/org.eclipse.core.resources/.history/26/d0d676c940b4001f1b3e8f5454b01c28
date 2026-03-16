@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include "system.h"
+#include "altera_avalon_pio_regs.h"
+
+// Define seven-segment hex patterns for 0-F
+const int hex_patterns[16] = {
+    0x01,
+    0x4F,
+    0x12,
+    0x06,
+    0x4C,
+    0x24,
+    0x20,
+    0x0F,
+    0x00,
+    0x04,
+    0x08,
+    0x60,
+    0x31,
+    0x42,
+    0x30,
+    0x38
+};
+
+
+
+int main() {
+
+    printf("starting...\n");
+	while(1)
+	{
+		// Read the switch state (4-bit value from switches)
+		int switch_value = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
+		// Output the switch state to the LEDs
+		IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, switch_value);
+
+		// Read the state of the switches
+		int switch_state = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
+		IOWR(CUSTOMIP_0_BASE, 0, switch_state);
+        
+        // Read back the keys
+        int key_data = IORD(CUSTOMIP_BASE, 1);  // Read from address 1
+        int keyOne = (key_data >> 8) & 0xFF;   // Extract keyOne (bits [15:8])
+        int keyTwo = key_data & 0xFF;          // Extract keyTwo (bits [7:0])
+
+        printf("KeyOne: 0x%02X, KeyTwo: 0x%02X\n", keyOne, keyTwo);
+
+	}
+
+    return 0;
+}
+

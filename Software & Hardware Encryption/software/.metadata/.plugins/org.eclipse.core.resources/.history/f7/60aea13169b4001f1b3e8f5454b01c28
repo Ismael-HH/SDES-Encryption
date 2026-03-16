@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include "system.h"
+#include "altera_avalon_pio_regs.h"
+
+// Define seven-segment hex patterns for 0-F
+const int hex_patterns[16] = {
+    0x01,
+    0x4F,
+    0x12,
+    0x06,
+    0x4C,
+    0x24,
+    0x20,
+    0x0F,
+    0x00,
+    0x04,
+    0x08,
+    0x60,
+    0x31,
+    0x42,
+    0x30,
+    0x38
+};
+
+
+
+int main() {
+
+
+	while(1)
+	{
+		// Read the state of the switches
+		int switch_state = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
+		IOWR(CUSTOMIP_0_BASE, 0, switch_state);
+        
+        // Read back the keys
+		int key_data = IORD(CUSTOMIP_0_BASE, 1);  // Read from address 1
+        int keyOne = (key_data >> 8) & 0xFF;   // Extract keyOne (bits [15:8])
+        int keyTwo = key_data & 0xFF;          // Extract keyTwo (bits [7:0])
+
+        int keyOneHex5 = (keyOne >> 4) & 0xF;
+        int keyOneHex4 = keyOne  & 0xF;
+
+        int keyOneHex3 = (keyTwo >> 4) & 0xF;
+        int keyOneHex2 = keyTwo & 0xF;
+
+        int hex5 = hex_patterns[keyOneHex5];
+        int hex4 = hex_patterns[keyOneHex4];
+        int hex3 = hex_patterns[keyOneHex3];
+        int hex2 = hex_patterns[keyOneHex2];
+
+
+		IOWR_ALTERA_AVALON_PIO_DATA(HEX5_BASE, hex5);
+		IOWR_ALTERA_AVALON_PIO_DATA(HEX4_BASE, hex4);
+		IOWR_ALTERA_AVALON_PIO_DATA(HEX3_BASE, hex3);
+		IOWR_ALTERA_AVALON_PIO_DATA(HEX2_BASE, hex2);
+
+
+
+	}
+
+    return 0;
+}
+

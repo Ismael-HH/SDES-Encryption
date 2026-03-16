@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include "system.h"
+#include "altera_avalon_pio_regs.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "semphr.h"
+
+
+//button queue messages
+#define KEYGEN 0
+#define ENCRYPT 1
+#define DECRYPT 2
+
+//handle creations
+SemaphoreHandle_t g_mutex;
+QueueHandle_t messageQueue;
+
+//delay constant
+const TickType_t ms_slept = 500 / portTICK_PERIOD_MS;
+
+// Define seven-segment hex patterns for 0-F
+const int hex_patterns[16] = {
+    0x01,
+    0x4F,
+    0x12,
+    0x06,
+    0x4C,
+    0x24,
+    0x20,
+    0x0F,
+    0x00,
+    0x04,
+    0x08,
+    0x60,
+    0x31,
+    0x42,
+    0x30,
+    0x38
+};
+
+//Key Generation task
+void vDisplayTask(void *pvParameters) {
+
+	//task declearions
+	int switchState;
+	int keyData;
+	int keyOne;
+	int keyTwo;
+	int keyOneHex5;
+	int keyOneHex4;
+	int keyTwoHex3;
+	int keyTwoHex2;
+	int hex5;
+	int hex4;
+	int hex3;
+	int hex2;
+    int currentMessage = -1;
+    int newMessage
+
+	while (1) {
+
+        // Check if there's a new pattern in the queue
+        if (xQueueReceive(messageQueue, &newMessage, 0) == pdTRUE)
+        {
+        	currentMessage = newMessage; // Update the current pattern
+        }
+
+        // Execute the current pattern
+		switch (currentMessage)
+		{
+		case KEYGEN: {
+        // Read the state of the switches
+        int switchState = IORD_ALTERA_AVALON_PIO_DATA(SWITCHES_BASE);
+
+        // Write switch state to custom IP
+        IOWR(CUSTOMIP_0_BASE, 0, switch_state);
+
+        // Read back the keys from the custom IP
+        keyData = IORD(CUSTOMIP_0_BASE, 1); // Read from address 1
+        keyOne = (keyData >> 8) & 0xFF;    // Extract keyOne (bits [15:8])
+        keyTwo = keyData & 0xFF;           // Extract keyTwo (bits [7:0])
+
+        // Extract individual nibbles for hexadecimal display
+        keyOneHex5 = (keyOne >> 4) & 0xF; // Upper nibble of keyOne
+        keyOneHex4 = keyOne & 0xF;        // Lower nibble of keyOne
+
+        keyTwoHex3 = (keyTwo >> 4) & 0xF; // Upper nibble of keyTwo
+        keyTwoHex2 = keyTwo & 0xF;        // Lower nibble of keyTwo
+
+        // Map nibbles to seven-segment patterns
+        hex5 = hex_patterns[keyOneHex5];
+        hex4 = hex_patterns[keyOneHex4];
+        hex3 = hex_patterns[keyTwoHex3];
+        hex2 = hex_patterns[keyTwoHex2];
+
+        // Write the patterns to the HEX displays
+        IOWR_ALTERA_AVALON_PIO_DATA(HEX5_BASE, hex5);
+        IOWR_ALTERA_AVALON_PIO_DATA(HEX4_BASE, hex4);
+        IOWR_ALTERA_AVALON_PIO_DATA(HEX3_BASE, hex3);
+        IOWR_ALTERA_AVALON_PIO_DATA(HEX2_BASE, hex2);
+
+        break;
+		}
+
+		default:
+		            break;
+		}
+		// Delay to allow FreeRTOS to switch to other tasks (e.g., 100 ms)
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+}
+
+// Button check class
+void ButtonTask(void *pvParameters)
+{
+    int message = 0xF;
+    int buttonState;
+    while (1)
+    {
+        // Read button inputs
+        xSemaphoreTake(g_mutex, portMAX_DELAY);
+        buttonState = IORD_ALTERA_AVALON_PIO_DATA(BUTTONS_BASE);
+
+        if (buttonState == 0x7) // Button 0: Cylon pattern
+        {
+            message = KEYGEN;
+        	xQueueSendToBack(messageQueue, &message, 10);
+
+        }
+        /*else if (buttonState == 0xB) // Button 1: Up counter pattern
+        {
+            pattern = UP_COUNTER_PATTERN;
+        	xQueueSendToBack(patternQueue, &pattern, 10);
+
+        }
+        else if (buttonState == 0xD) // Button 2: Blink pattern
+        {
+            pattern = BLINK_PATTERN;
+        	xQueueSendToBack(patternQueue, &pattern, 10);
+
+        }*/
+        xSemaphoreGive(g_mutex);
+        vTaskDelay(ms_slept); // Poll buttons periodically
+
+
+int main() {
+
+
+	while(1)
+	{
+	    if (pdFAIL == xTaskCreate(ButtonTask, "Button Task", configMINIMAL_STACK_SIZE, NULL, 1, NULL))
+	    {
+	        printf("Button task creation failed\n");
+	    }
+
+	    xTaskCreate(vDisplayTask,      // Task function
+	                "DisplayTask",     // Name of the task (for debugging)
+	                configMINIMAL_STACK_SIZE, // Stack size (adjust if needed)
+	                NULL,              // Task parameters (not used)
+	                1, 					// Task priority
+	                NULL);             // Task handle (not used)
+
+	    // Start the FreeRTOS scheduler
+	    vTaskStartScheduler();
+
+
+	}
+
+    return 0;
+}
+
